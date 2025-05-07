@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition"
+        xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+	<!-- 1. DATA SOURCES -->
+	<DataSources>
+		<DataSource Name="CustomerDataSource">
+			<ConnectionProperties>
+				<DataProvider>System.Data.DataSet</DataProvider>
+				<ConnectString />
+			</ConnectionProperties>
+		</DataSource>
+	</DataSources>
+
+	<!-- 2. DATASET DEFINITION -->
+	<DataSets>
+		<DataSet Name="CustomerDataSet">
+			<Fields>
+				<Field Name="Id">
+					<DataField>Id</DataField>
+					<rd:TypeName>System.Int32</rd:TypeName>
+				</Field>
+				<Field Name="Name">
+					<DataField>Name</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="Phone">
+					<DataField>Phone</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="Address">
+					<DataField>Address</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="BusinessName">
+					<DataField>BusinessName</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="CategoryName">
+					<DataField>CategoryName</DataField>
+					<rd:TypeName>System.String</rd:TypeName>
+				</Field>
+				<Field Name="IsActive">
+					<DataField>IsActive</DataField>
+					<rd:TypeName>System.Boolean</rd:TypeName>
+				</Field>
+			</Fields>
+			<Query>
+				<DataSourceName>CustomerDataSource</DataSourceName>
+				<CommandText />
+			</Query>
+		</DataSet>
+	</DataSets>
+
+	<!-- 3. REPORT PARAMETERS -->
+	<Parameters>
+		<Parameter Name="ReportTitle">
+			<DataType>String</DataType>
+			<DefaultValue>
+				<Values>
+					<Value>Customer Details Report</Value>
+				</Values>
+			</DefaultValue>
+		</Parameter>
+		<Parameter Name="GeneratedDate">
+			<DataType>DateTime</DataType>
+			<DefaultValue>
+				<Values>
+					<Value>=Now()</Value>
+				</Values>
+			</DefaultValue>
+		</Parameter>
+	</Parameters>
+
+	<!-- 4. REPORT HEADER -->
+	<PageHeader>
+		<Height>0.75in</Height>
+		<ReportItems>
+			<!-- Company Logo -->
+			<Image Name="Logo" Width="1.5in" Height="0.5in">
+				<Source>External</Source>
+				<Value>https://example.com/logo.png</Value>
+				<!-- Replace with your logo path -->
+				<Sizing>FitProportional</Sizing>
+			</Image>
+
+			<!-- Report Title -->
+			<Textbox Name="Title" Top="0.25in" Left="2in" Width="4in" Height="0.5in">
+				<Value>=Parameters!ReportTitle.Value</Value>
+				<Style>
+					<FontSize>16pt</FontSize>
+					<FontWeight>Bold</FontWeight>
+					<TextAlign>Center</TextAlign>
+				</Style>
+			</Textbox>
+
+			<!-- Generation Date -->
+			<Textbox Name="Date" Top="0.25in" Left="6.5in" Width="2in" Height="0.5in">
+				<Value>="Generated: " Format(Parameters!GeneratedDate.Value, "MM/dd/yyyy")</Value>
+				<Style>
+					<FontSize>10pt</FontSize>
+					<TextAlign>Right</TextAlign>
+				</Style>
+			</Textbox>
+		</ReportItems>
+	</PageHeader>
+
+	<!-- 5. REPORT BODY -->
+	<Body>
+		<ReportItems>
+			<!-- Main Data Table -->
+			<Tablix Name="CustomerTable">
+				<TablixBody>
+					<TablixColumns>
+						<TablixColumn>
+							<Width>1.5in</Width>
+						</TablixColumn>
+						<TablixColumn>
+							<Width>1.2in</Width>
+						</TablixColumn>
+						<TablixColumn>
+							<Width>2in</Width>
+						</TablixColumn>
+						<TablixColumn>
+							<Width>1.5in</Width>
+						</TablixColumn>
+						<TablixColumn>
+							<Width>1.2in</Width>
+						</TablixColumn>
+						<TablixColumn>
+							<Width>0.8in</Width>
+						</TablixColumn>
+					</TablixColumns>
+					<TablixRows>
+						<!-- Column Headers -->
+						<TablixRow>
+							<Height>0.25in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="NameHeader">
+											<Value>Name</Value>
+											<Style>
+												<FontWeight>Bold</FontWeight>
+												<BackgroundColor>#4e73df</BackgroundColor>
+												<Color>White</Color>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="PhoneHeader">
+											<Value>Phone</Value>
+											<Style>
+												<FontWeight>Bold</FontWeight>
+												<BackgroundColor>#4e73df</BackgroundColor>
+												<Color>White</Color>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="AddressHeader">
+											<Value>Address</Value>
+											<Style>
+												<FontWeight>Bold</FontWeight>
+												<BackgroundColor>#4e73df</BackgroundColor>
+												<Color>White</Color>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="BusinessHeader">
+											<Value>Business</Value>
+											<Style>
+												<FontWeight>Bold</FontWeight>
+												<BackgroundColor>#4e73df</BackgroundColor>
+												<Color>White</Color>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="CategoryHeader">
+											<Value>Category</Value>
+											<Style>
+												<FontWeight>Bold</FontWeight>
+												<BackgroundColor>#4e73df</BackgroundColor>
+												<Color>White</Color>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="StatusHeader">
+											<Value>Status</Value>
+											<Style>
+												<FontWeight>Bold</FontWeight>
+												<BackgroundColor>#4e73df</BackgroundColor>
+												<Color>White</Color>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+
+						<!-- Data Rows -->
+						<TablixRow>
+							<Height>0.25in</Height>
+							<TablixCells>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="NameValue">
+											<Value>=Fields!Name.Value</Value>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="PhoneValue">
+											<Value>=Fields!Phone.Value</Value>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="AddressValue">
+											<Value>=Fields!Address.Value</Value>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="BusinessValue">
+											<Value>=Fields!BusinessName.Value</Value>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="CategoryValue">
+											<Value>=Fields!CategoryName.Value</Value>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+								<TablixCell>
+									<CellContents>
+										<Textbox Name="StatusValue">
+											<Value>=IIF(Fields!IsActive.Value, "Active", "Inactive")</Value>
+											<Style>
+												<Color>=IIF(Fields!IsActive.Value, "Green", "Red")</Color>
+											</Style>
+										</Textbox>
+									</CellContents>
+								</TablixCell>
+							</TablixCells>
+						</TablixRow>
+					</TablixRows>
+				</TablixBody>
+			</Tablix>
+		</ReportItems>
+		<Height>2in</Height>
+	</Body>
+
+	<!-- 6. PAGE FOOTER -->
+	<PageFooter>
+		<Height>0.25in</Height>
+		<ReportItems>
+			<Textbox Name="PageNumber" Width="8.5in" Height="0.25in">
+				<Value>="Page " Globals!PageNumber " of " Globals!TotalPages</Value>
+				<Style>
+					<TextAlign>Center</TextAlign>
+					<FontSize>10pt</FontSize>
+				</Style>
+			</Textbox>
+		</ReportItems>
+	</PageFooter>
+
+	<Width>8.5in</Width>
+	<Page>
+		<PageWidth>8.5in</PageWidth>
+		<PageHeight>11in</PageHeight>
+		<LeftMargin>0.5in</LeftMargin>
+		<RightMargin>0.5in</RightMargin>
+		<TopMargin>0.5in</TopMargin>
+		<BottomMargin>0.5in</BottomMargin>
+	</Page>
+</Report>

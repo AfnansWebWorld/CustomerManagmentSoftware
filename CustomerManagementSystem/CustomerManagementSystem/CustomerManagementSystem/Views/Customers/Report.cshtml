@@ -1,0 +1,71 @@
+﻿@{
+    ViewData["Title"] = "Generate Customer Report";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">@ViewData["Title"]</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="report-options p-4 border rounded">
+                    <h5 class="mb-4"><i class="fas fa-cog"></i> Report Options</h5>
+
+                    <form asp-action="GenerateReport" target="_blank">
+                        <div class="form-group">
+                            <label>Report Format</label>
+                            <select class="form-control">
+                                <option>PDF (Recommended)</option>
+                                <option>Excel</option>
+                                <option>Word</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date Range</label>
+                            <div class="input-daterange input-group">
+                                <input type="date" class="form-control" name="startDate" />
+                                <div class="input-group-append">
+                                    <span class="input-group-text">to</span>
+                                </div>
+                                <input type="date" class="form-control" name="endDate" />
+                            </div>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="includeInactive" checked>
+                            <label class="form-check-label" for="includeInactive">Include Inactive Customers</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">
+                            <i class="fas fa-file-pdf"></i> Generate Report
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="report-preview p-4 border rounded">
+                    <h5 class="mb-4"><i class="fas fa-eye"></i> Report Preview</h5>
+                    <div class="text-center">
+                        <img src="~/img/report-preview.png" class="img-fluid" alt="Report Preview">
+                        <p class="mt-3 text-muted">Sample preview of the customer report</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+        <style>
+            .report-options, .report-preview {
+                background: #f8f9fa;
+                min-height: 400px;
+            }
+            .input-daterange .input-group-text {
+                background: #e9ecef;
+            }
+        </style>
+}
